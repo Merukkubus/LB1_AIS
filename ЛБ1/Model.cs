@@ -10,7 +10,7 @@ namespace ЛБ1
 {
  
  
-        public struct Reader
+        public class Reader
         {
             public int id { get; set; }
             public string name { get; set; }

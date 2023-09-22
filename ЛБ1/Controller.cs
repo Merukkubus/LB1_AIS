@@ -11,34 +11,28 @@ namespace ЛБ1
 {
     public class Controller
     {
-        public Controller()
-        {
-            Reader model = new();
-            List<Reader> readers = new List<Reader>();
-        }
         static void Main(string[] args)
         {
             View view = new();
-            while (true)
-            {
-
-                var key = Console.ReadKey();
-                switch (key.Key)
-                {
-                    case ConsoleKey.Escape:
-                        {
-                            return;
-                        }
-                    default:
-                        Console.Clear();
-                        view.Menu();
-                        break;
-                }
-            }
+            Console.WriteLine("Введите название файла: ");
+            string name = Console.ReadLine().ToString();
+            view.Menu(GetPath(name));
         }
         char Delimiter = ',';
         StringBuilder scv = new StringBuilder();
         List<Reader> readers = new List<Reader>();
+        public static string GetPath(string name)
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory;
+            return path + name + ".csv";
+        }
+        public void Conclusion(string path)
+        {
+            using (StreamReader sr = new StreamReader(path))
+            {
+                Console.WriteLine(sr.ReadToEnd());
+            }
+        }
         public void Add(string path) //case 2
         {
             scv.Clear();
